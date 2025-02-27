@@ -80,10 +80,12 @@ ORDER BY Total_Sales DESC
 
 --Total Sales over time
 
-SELECT Order_Date, SUM(Sales) AS Total_Sales
+SELECT Coffee_Type,
+	Order_Date, 
+	SUM(Sales) AS Total_Sales 
 FROM CoffeeSales
-GROUP BY Order_Date
-ORDER BY Order_Date 
+GROUP BY Order_Date, Coffee_Type
+ORDER BY Order_Date
 
 -- Top Customer by revenue
 
@@ -99,9 +101,11 @@ FROM CoffeeSales
 GROUP BY Roast_Type
 ORDER BY Total_Sales DESC
 
+-- Sales by county
 
-
-
-
-
-
+SELECT Country, 
+	SUM(Sales) AS Total_Sales,
+	YEAR(Order_Date)AS OrderYear
+FROM CoffeeSales
+GROUP BY Country, YEAR(Order_Date)
+ORDER BY OrderYear DESC
